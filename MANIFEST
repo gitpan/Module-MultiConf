@@ -13,3 +13,4 @@ Makefile.PL
 META.yml
 Changes
 lib/Module/MultiConf.pm
+INSTALL

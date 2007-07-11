@@ -1,7 +1,7 @@
 #
-# $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/librpc-serialized-perl/trunk/lib/RPC/Serialized/Config.pm $
-# $LastChangedRevision: 1300 $
-# $LastChangedDate: 2007-07-04 18:50:01 +0100 (Wed, 04 Jul 2007) $
+# $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/lib/Module/MultiConf.pm $
+# $LastChangedRevision: 1331 $
+# $LastChangedDate: 2007-07-11 13:19:35 +0100 (Wed, 11 Jul 2007) $
 # $LastChangedBy: oliver $
 #
 package Module::MultiConf;
@@ -17,10 +17,11 @@ use Config::Any;
 use Params::Validate ':all';
 use Class::Data::Inheritable;
 
-our $VERSION = '0.0100_01';
+our $VERSION = '0.0100_02';
 
 sub import {
-    my $caller = (caller)[0];
+    my $caller = caller(0);
+    return if $caller eq 'main'; # testing abuse
 
     # fake up use base...
     push @{*{Symbol::qualify_to_ref('ISA',$caller)}},
@@ -44,13 +45,10 @@ sub import {
 *{Symbol::qualify_to_ref('parse')} = \&new;
 
 sub new {
-    my $class = shift;
+    my $self = shift;
     my @args  = @_;
-    my $self;
 
-    return $class->_load_args if scalar @args == 0;
-    croak "Max of two args, please read the docs"
-        if scalar @args > 2;
+    return $self->_load_args if scalar @args == 0;
 
     foreach (@args) {
         my $config = $_;
@@ -58,7 +56,7 @@ sub new {
         # if arg is a filename, "convert" to a hashref by loading
         if (!ref $config) {
             my $loaded = Config::Any->load_files({files => [$config]});
-            croak "Failed to parse contents of '$config'"
+            croak "Failed to parse contents of filename '$config'"
                 if scalar @$loaded == 0;
 
             (undef, $config) = each %{$loaded->[0]};
@@ -67,7 +65,7 @@ sub new {
         croak "Config does not build a HASHREF"
             unless ref $config eq 'HASH' or blessed $config;
 
-        $self = $class->_load_args($config);
+        $self = $self->_load_args($config);
     }
 
     return $self;
@@ -108,7 +106,7 @@ sub _load_args {
 
     foreach my $k (keys %copy) {
         next if UNIVERSAL::can($self, $k);
-        next if UNIVERSAL::can('main', $k); # XXX must investigate
+        next if UNIVERSAL::can('main', $k); # testing abuse
 
         *{Symbol::qualify_to_ref($k, $pkg)} = sub {
             my $self = shift;
@@ -130,7 +128,7 @@ sub _load_args {
 
 sub me {
     my $self = shift;
-    (my $me = lc ((caller)[0])) =~ s/::/_/g;
+    (my $me = lc (scalar caller(0))) =~ s/::/_/g;
     return $self->$me;
 }
 
@@ -144,7 +142,7 @@ Module::MultiConf - Configure and validate your app modules in one go
 
 =head1 VERSION
 
-This document refers to version 0.0100_01 of Module::MultiConf
+This document refers to version 0.0100_02 of Module::MultiConf
 
 =head1 SYNOPSIS
 
@@ -172,12 +170,13 @@ This document refers to version 0.0100_01 of Module::MultiConf
  sub new {
      my $class = shift;
      my $params = MyApp::Config->parse(@_);
-         # @_ will be validated, and populated with defaults
+         # @_ will be validated, and transferred to $params
 
      my $var1 = $params->myapp_componentthingy->{var1}; # gets a value
      my $var2 = $params->me->{var1}; # same thing, "me" aliases current package
- 
-     $params->me->{cached_obj} =
+
+     # you can update the contents of $params, and add new data
+     $params->me->{new_cached_obj} =
         Another::Module->new( $params->another_module );
   
      return $class->SUPER::new($params);
@@ -194,10 +193,9 @@ This document refers to version 0.0100_01 of Module::MultiConf
 
 =head1 DESCRIPTION
 
-This module might allow you to manage better your application configuration,
-if most of the config is actually for other modules which you use. The idea
-here is that you store all that config in one place, probably an external
-file.
+This module might help you to manage your application configuration, if most
+of the config is actually for other modules which you use. The idea here is
+that you store all that config in one place, probably an external file.
 
 You can optionally use a validation specification, as described by
 Params::Validate, to check you are not missing anything when the config is
@@ -209,7 +207,8 @@ configuration, which returns a reference to the hash of that blob's content.
 This release is just an initial version, more documentation will follow once
 the interface has been stabalized. For now, please look at the tests which
 should show you what to do. It would also be worth reading the
-Params::Validate and Config::Any manual pages.
+Params::Validate and Config::Any manual pages, and the example files included
+with this distribution.
 
 =head1 AUTHOR
 

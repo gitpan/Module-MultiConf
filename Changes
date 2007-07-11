@@ -1,3 +1,11 @@
+libmodule-multiconf-perl (0.0100-02-1) unstable; urgency=low
+
+  * Remove restriction of only two arguments.
+  * Tighten up import() routing when run under testing
+  * Add example files
+
+ -- Oliver Gorwits <oliver.gorwits@oucs.ox.ac.uk>  Sun,  8 Jul 2007 18:31:54 +0100
+
 libmodule-multiconf-perl (0.0100-01-1) unstable; urgency=low
 
   * Initial Release.

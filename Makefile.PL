@@ -8,10 +8,6 @@ WriteMakefile(
     NAME              => 'Module::MultiConf',
     VERSION_FROM      => 'lib/Module/MultiConf.pm', # finds $VERSION
     PREREQ_PM         => {
-        Carp => 0,
-        Symbol => 0,
-        UNIVERSAL => 0,
-        Scalar::Util => 0,
         Config::Any => 0,
         Params::Validate => 0,
         Class::Data::Inheritable => 0,
