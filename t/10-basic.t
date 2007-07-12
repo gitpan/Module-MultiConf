@@ -1,18 +1,18 @@
 #!/usr/bin/perl
 #
 # $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/t/10-basic.t $
-# $LastChangedRevision: 1313 $
-# $LastChangedDate: 2007-07-07 21:10:33 +0100 (Sat, 07 Jul 2007) $
+# $LastChangedRevision: 1348 $
+# $LastChangedDate: 2007-07-12 15:23:07 +0100 (Thu, 12 Jul 2007) $
 # $LastChangedBy: oliver $
 #
 
 use strict;
 use warnings FATAL => 'all';
 
-use Test::More tests => 10;
+use Test::More tests => 9;
 
 package ConfTest;
-Test::More::use_ok( 'Module::MultiConf' );
+use Module::MultiConf;
 package main;
 
 can_ok( 'ConfTest', 'import' );

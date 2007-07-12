@@ -12,5 +12,7 @@ MANIFEST
 Makefile.PL
 META.yml
 Changes
-lib/Module/MultiConf.pm
 INSTALL
+lib/Module/MultiConf.pm
+examples/MyAppConfig.pm
+examples/config.yml
