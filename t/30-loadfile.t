@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 #
 # $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/t/30-loadfile.t $
-# $LastChangedRevision: 1348 $
-# $LastChangedDate: 2007-07-12 15:23:07 +0100 (Thu, 12 Jul 2007) $
+# $LastChangedRevision: 1349 $
+# $LastChangedDate: 2007-07-15 10:28:06 +0100 (Sun, 15 Jul 2007) $
 # $LastChangedBy: oliver $
 #
 
@@ -32,6 +32,7 @@ sub test_config {
     my $path = mk_config($config);
     my $c = eval { ConfTest->new($path) };
     if ($@) {
+        diag($@);
         like( $@, qr/$msg/ );
     }
     else {
@@ -49,7 +50,7 @@ my %config = (
 test_config( \%config, 'Loaded config must be a HASHREF of HASHREFs' );
 
 %config = ( config => { %config } );
-my $c = test_config( \%config, '' );
+my $c = test_config( \%config, 'should not die' );
 
 can_ok( $c, 'config' );
 is( $c->config->{acl_path}, 'nuffink', 'config content 1' );
