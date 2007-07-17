@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/t/30-loadfile.t $
+# $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/t/31-loadfile-ok.t $
 # $LastChangedRevision: 1350 $
 # $LastChangedDate: 2007-07-17 19:22:26 +0100 (Tue, 17 Jul 2007) $
 # $LastChangedBy: oliver $
@@ -9,7 +9,7 @@
 use strict;
 use warnings FATAL => 'all';
 
-use Test::More tests => 1;
+use Test::More tests => 4;
 
 use File::Temp 'tempfile';
 use Data::Dumper;
@@ -32,6 +32,7 @@ sub test_config {
     my $path = mk_config($config);
     my $c = eval { ConfTest->new($path) };
     if ($@) {
+        diag($@);
         like( $@, qr/$msg/ );
     }
     else {
@@ -40,11 +41,16 @@ sub test_config {
     return $c;
 }
 
-my %config = (
-    acl_path     => 'nuffink',
-    server_class => 'pots',
-    handlers     => {kettle => 'yellow'}
-);
+my $config = {
+    config => {
+        acl_path     => 'nuffink',
+        server_class => 'pots',
+        handlers     => {kettle => 'yellow'},
+    },
+};
 
-test_config( \%config, 'Loaded config must be a HASHREF of HASHREFs' );
+my $c = test_config( $config, 'should not die' );
 
+is( $c->config->{acl_path}, 'nuffink', 'config content 1' );
+is( $c->config->{server_class}, 'pots', 'config content 2' );
+is( $c->config->{handlers}->{kettle}, 'yellow', 'config content 3' );

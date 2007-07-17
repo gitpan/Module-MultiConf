@@ -1,7 +1,7 @@
 #
 # $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/lib/Module/MultiConf.pm $
-# $LastChangedRevision: 1349 $
-# $LastChangedDate: 2007-07-15 10:28:06 +0100 (Sun, 15 Jul 2007) $
+# $LastChangedRevision: 1350 $
+# $LastChangedDate: 2007-07-17 19:22:26 +0100 (Tue, 17 Jul 2007) $
 # $LastChangedBy: oliver $
 #
 package Module::MultiConf;
@@ -17,7 +17,7 @@ use Config::Any;
 use Params::Validate ':all';
 use Class::Data::Inheritable;
 
-our $VERSION = '0.0100_04';
+our $VERSION = '0.0100_05';
 
 sub import {
     my $caller = caller(0);
@@ -142,7 +142,7 @@ Module::MultiConf - Configure and validate your app modules in one go
 
 =head1 VERSION
 
-This document refers to version 0.0100_04 of Module::MultiConf
+This document refers to version 0.0100_05 of Module::MultiConf
 
 =head1 SYNOPSIS
 

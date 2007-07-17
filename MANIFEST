@@ -1,6 +1,7 @@
 t/10-basic.t
 t/20-load.t
 t/30-loadfile.t
+t/31-loadfile-ok.t
 t/40-validate.t
 t/50-force.t
 t/60-mandatory.t
