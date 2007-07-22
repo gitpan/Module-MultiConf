@@ -1,3 +1,9 @@
+libmodule-multiconf-perl (0.0100-06-1) unstable; urgency=low
+
+  * Set SUFFIX on temp filename
+
+ -- Oliver Gorwits <oliver.gorwits@oucs.ox.ac.uk>  Sun, 22 Jul 2007 19:01:00 +0100
+
 libmodule-multiconf-perl (0.0100-05-1) unstable; urgency=low
 
   * Split t/30 into two tests

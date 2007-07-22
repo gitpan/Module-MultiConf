@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 #
 # $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/t/30-loadfile.t $
-# $LastChangedRevision: 1350 $
-# $LastChangedDate: 2007-07-17 19:22:26 +0100 (Tue, 17 Jul 2007) $
+# $LastChangedRevision: 1357 $
+# $LastChangedDate: 2007-07-22 19:02:20 +0100 (Sun, 22 Jul 2007) $
 # $LastChangedBy: oliver $
 #
 
@@ -21,7 +21,7 @@ package main;
 
 sub mk_config {
     my $config = shift;
-    my ( $fh, $path ) = tempfile( UNLINK => 1 );
+    my ( $fh, $path ) = tempfile( UNLINK => 1, SUFFIX => '.pl' );
     $fh->print( Dumper $config );
     $fh->close();
     return $path;
