@@ -1,7 +1,7 @@
 #
-# $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/examples/MyAppConfig.pm $
-# $LastChangedRevision: 1331 $
-# $LastChangedDate: 2007-07-11 13:19:35 +0100 (Wed, 11 Jul 2007) $
+# $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/examples/MyAppConfig.pm.example $
+# $LastChangedRevision: 1360 $
+# $LastChangedDate: 2007-07-23 21:25:09 +0100 (Mon, 23 Jul 2007) $
 # $LastChangedBy: oliver $
 #
 package MyAppConfig;

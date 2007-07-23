@@ -1,3 +1,9 @@
+libmodule-multiconf-perl (0.0201-1) unstable; urgency=low
+
+  * Fix CPAN index of example
+
+ -- Oliver Gorwits <oliver.gorwits@oucs.ox.ac.uk>  Mon, 23 Jul 2007 21:24:00 +0100
+
 libmodule-multiconf-perl (0.0200-1) unstable; urgency=low
 
   * Set dodgy test t/31 to TODO. Please, if you find a problem with this
