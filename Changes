@@ -1,3 +1,11 @@
+libmodule-multiconf-perl (0.0200-1) unstable; urgency=low
+
+  * Set dodgy test t/31 to TODO. Please, if you find a problem with this
+    module do get in touch, I would really appreciate a hand, as I cannot
+    reproduce the bug in t/31 on my own system.
+
+ -- Oliver Gorwits <oliver.gorwits@oucs.ox.ac.uk>  Mon, 23 Jul 2007 20:58:00 +0100
+
 libmodule-multiconf-perl (0.0100-06-1) unstable; urgency=low
 
   * Set SUFFIX on temp filename

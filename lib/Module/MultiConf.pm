@@ -1,7 +1,7 @@
 #
 # $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/lib/Module/MultiConf.pm $
-# $LastChangedRevision: 1357 $
-# $LastChangedDate: 2007-07-22 19:02:20 +0100 (Sun, 22 Jul 2007) $
+# $LastChangedRevision: 1358 $
+# $LastChangedDate: 2007-07-23 20:59:57 +0100 (Mon, 23 Jul 2007) $
 # $LastChangedBy: oliver $
 #
 package Module::MultiConf;
@@ -17,7 +17,7 @@ use Config::Any;
 use Params::Validate ':all';
 use Class::Data::Inheritable;
 
-our $VERSION = '0.0100_06';
+our $VERSION = '0.0200';
 
 sub import {
     my $caller = caller(0);
@@ -142,7 +142,7 @@ Module::MultiConf - Configure and validate your app modules in one go
 
 =head1 VERSION
 
-This document refers to version 0.0100_06 of Module::MultiConf
+This document refers to version 0.0200 of Module::MultiConf
 
 =head1 SYNOPSIS
 
@@ -204,11 +204,14 @@ loaded or passed around.
 The interface to the stored config provides an object method per blob of
 configuration, which returns a reference to the hash of that blob's content.
 
-This release is just an initial version, more documentation will follow once
-the interface has been stabalized. For now, please look at the tests which
-should show you what to do. It would also be worth reading the
-Params::Validate and Config::Any manual pages, and the example files included
-with this distribution.
+You can load config using a filename parameter, which is passed to
+L<Config::Any>, or a hash reference of hash references, each representing the
+config for one module. Each of these may be repeated as you like, with later
+items overriding earlier ones.
+
+Please refer to the bundled example files and tests for further details. It
+would also be worth reading the L<Params::Validate> and L<Config::Any> manual
+pages.
 
 =head1 SEE ALSO
 
@@ -228,24 +231,22 @@ with this distribution.
 
 Oliver Gorwits C<< <oliver.gorwits@oucs.ox.ac.uk> >>
 
+Tests were written by myself and Ray Miller.
+
 =head1 COPYRIGHT & LICENSE
 
 Copyright (c) The University of Oxford 2007. All Rights Reserved.
 
-This program is free software; you can redistribute it and/or modify it
-under
+This program is free software; you can redistribute it and/or modify it under
 the terms of version 2 of the GNU General Public License as published by the
 Free Software Foundation.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-FITNESS
-FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-details.
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
-this program; if not, write to the Free Software Foundation, Inc., 51
-Franklin
+this program; if not, write to the Free Software Foundation, Inc., 51 Franklin
 St, Fifth Floor, Boston, MA 02110-1301 USA
 
 =cut

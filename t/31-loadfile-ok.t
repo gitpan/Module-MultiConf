@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 #
 # $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/t/31-loadfile-ok.t $
-# $LastChangedRevision: 1357 $
-# $LastChangedDate: 2007-07-22 19:02:20 +0100 (Sun, 22 Jul 2007) $
+# $LastChangedRevision: 1358 $
+# $LastChangedDate: 2007-07-23 20:59:57 +0100 (Mon, 23 Jul 2007) $
 # $LastChangedBy: oliver $
 #
 
@@ -49,8 +49,12 @@ my $config = {
     },
 };
 
-my $c = test_config( $config, 'should not die' );
+TODO: {
+    local $TODO = 'Bad tests (ab)using Config::Any';
 
-is( $c->config->{acl_path}, 'nuffink', 'config content 1' );
-is( $c->config->{server_class}, 'pots', 'config content 2' );
-is( $c->config->{handlers}->{kettle}, 'yellow', 'config content 3' );
+    my $c = test_config( $config, 'should not die' );
+
+    is( $c->config->{acl_path}, 'nuffink', 'config content 1' );
+    is( $c->config->{server_class}, 'pots', 'config content 2' );
+    is( $c->config->{handlers}->{kettle}, 'yellow', 'config content 3' );
+}
