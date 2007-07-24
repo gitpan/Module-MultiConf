@@ -1,7 +1,7 @@
 # http://module-build.sourceforge.net/META-spec.html
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         Module-MultiConf
-version:      0.0201
+version:      0.0300
 version_from: lib/Module/MultiConf.pm
 installdirs:  site
 requires:

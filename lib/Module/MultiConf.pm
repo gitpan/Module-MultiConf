@@ -1,7 +1,7 @@
 #
 # $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/lib/Module/MultiConf.pm $
-# $LastChangedRevision: 1360 $
-# $LastChangedDate: 2007-07-23 21:25:09 +0100 (Mon, 23 Jul 2007) $
+# $LastChangedRevision: 1362 $
+# $LastChangedDate: 2007-07-24 09:57:33 +0100 (Tue, 24 Jul 2007) $
 # $LastChangedBy: oliver $
 #
 package Module::MultiConf;
@@ -17,7 +17,7 @@ use Config::Any;
 use Params::Validate ':all';
 use Class::Data::Inheritable;
 
-our $VERSION = '0.0201';
+our $VERSION = '0.0300';
 
 sub import {
     my $caller = caller(0);
@@ -46,16 +46,17 @@ sub import {
 
 sub new {
     my $self = shift;
-    my @args  = @_;
+    my @args = @_;
 
-    return $self->_load_args if scalar @args == 0;
+    return $self->_load_args() if scalar @args == 0;
 
     foreach (@args) {
         my $config = $_;
 
         # if arg is a filename, "convert" to a hashref by loading
         if (!ref $config) {
-            my $loaded = Config::Any->load_files({files => [$config]});
+            my $loaded = Config::Any->load_files(
+                {files => [$config], use_ext => 1});
             croak "Failed to parse contents of filename '$config'"
                 if scalar @$loaded == 0;
 
@@ -77,7 +78,7 @@ sub _load_args {
     # factory
     $self = bless {}, $self if !ref $self;
 
-    my $args = shift;
+    my $args = shift || {};
     my %copy = %$self;    # copy for validation and munging
     my $pkg  = ref $self; # package into which we look for Validation spec
 
@@ -142,7 +143,7 @@ Module::MultiConf - Configure and validate your app modules in one go
 
 =head1 VERSION
 
-This document refers to version 0.0201 of Module::MultiConf
+This document refers to version 0.0300 of Module::MultiConf
 
 =head1 SYNOPSIS
 
@@ -208,6 +209,10 @@ You can load config using a filename parameter, which is passed to
 L<Config::Any>, or a hash reference of hash references, each representing the
 config for one module. Each of these may be repeated as you like, with later
 items overriding earlier ones.
+
+Be aware that C<Config::Any> is called with the C<use_ext> parameter, meaning
+you I<must> use file extensions on your config files. I am sorry about having
+to do this, but it makes things just too unpredictable not to enable it.
 
 Please refer to the bundled example files and tests for further details. It
 would also be worth reading the L<Params::Validate> and L<Config::Any> manual

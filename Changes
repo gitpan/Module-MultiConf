@@ -1,3 +1,11 @@
+libmodule-multiconf-perl (0.0300-1) unstable; urgency=low
+
+  * Many thanks to Tom Hukins for assisting with the mysterious t/31 bug
+  * Alter Config::Any call to call use_ext => 1
+  * Fixed a bug Tom spotted in arg-less call to new
+
+ -- Oliver Gorwits <oliver.gorwits@oucs.ox.ac.uk>  Tue, 24 Jul 2007 09:50:00 +0100
+
 libmodule-multiconf-perl (0.0201-1) unstable; urgency=low
 
   * Fix CPAN index of example
