@@ -1,8 +1,5 @@
 #
-# $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/lib/Module/MultiConf.pm $
-# $LastChangedRevision: 1362 $
-# $LastChangedDate: 2007-07-24 09:57:33 +0100 (Tue, 24 Jul 2007) $
-# $LastChangedBy: oliver $
+# $Id: MultiConf.pm 1384 2007-09-30 13:49:29Z oliver $
 #
 package Module::MultiConf;
 
@@ -17,11 +14,14 @@ use Config::Any;
 use Params::Validate ':all';
 use Class::Data::Inheritable;
 
-our $VERSION = '0.0300';
+our $VERSION = '0.0301';
 
 sub import {
     my $caller = caller(0);
     return if $caller eq 'main'; # testing abuse
+
+    my $class = shift;
+    my %args  = @_;
 
     # fake up use base...
     push @{*{Symbol::qualify_to_ref('ISA',$caller)}},
@@ -37,8 +37,10 @@ sub import {
     $caller->mk_classdata(Validate => {});
     $caller->mk_classdata(Force    => {});
     $caller->mk_classdata(Defaults => {
-        allow_extra => 1,
-        on_fail     => sub { croak $_[0] },
+        allow_extra   => 1,
+        on_fail       => sub { croak $_[0] },
+        no_validation => 0,
+        %args,
     });
 }
 
@@ -91,12 +93,17 @@ sub _load_args {
 
     # validate new content
     my $validate = $pkg->Validate;
-    foreach my $k (keys %$validate) {
-        %{$copy{$k}} = validate_with(
-            params      => $copy{$k} || {},
-            spec        => $validate->{$k},
-            %{ $pkg->Defaults },
-        );
+    my $no_valid = $pkg->Defaults->{'no_validation'} || 0;
+
+    {
+        local $Params::Validate::NO_VALIDATION = $no_valid;
+        foreach my $k (keys %$validate) {
+            %{$copy{$k}} = validate_with(
+                params      => $copy{$k} || {},
+                spec        => $validate->{$k},
+                %{ $pkg->Defaults },
+            );
+        }
     }
 
     # squash things which are enforced
@@ -143,7 +150,7 @@ Module::MultiConf - Configure and validate your app modules in one go
 
 =head1 VERSION
 
-This document refers to version 0.0300 of Module::MultiConf
+This document refers to version 0.0301 of Module::MultiConf
 
 =head1 SYNOPSIS
 
@@ -217,6 +224,11 @@ to do this, but it makes things just too unpredictable not to enable it.
 Please refer to the bundled example files and tests for further details. It
 would also be worth reading the L<Params::Validate> and L<Config::Any> manual
 pages.
+
+To have Params::Validate construct your mix of default and override options
+whilst not validating for missing options, load the module like so:
+
+ use MyApp::Config no_validation => 1;
 
 =head1 SEE ALSO
 

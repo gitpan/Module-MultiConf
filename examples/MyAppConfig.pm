@@ -1,10 +1,11 @@
 #
-# $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/examples/MyAppConfig.pm.example $
-# $LastChangedRevision: 1360 $
-# $LastChangedDate: 2007-07-23 21:25:09 +0100 (Mon, 23 Jul 2007) $
+# $HeadURL: https://svn.oucs.ox.ac.uk/networks/src/debian/packages/libr/libmodule-multiconf-perl/trunk/examples/MyAppConfig.pm $
+# $LastChangedRevision: 1380 $
+# $LastChangedDate: 2007-09-21 11:50:13 +0100 (Fri, 21 Sep 2007) $
 # $LastChangedBy: oliver $
 #
-package MyAppConfig;
+package # hide from PAUSE
+    MyAppConfig;
 
 use strict;
 use warnings FATAL => 'all';

@@ -1,3 +1,10 @@
+libmodule-multiconf-perl (0.0301-1) unstable; urgency=low
+
+  * Options in validate_with can now be poked by calling module
+  * Also, validation can be disabled
+
+ -- Oliver Gorwits <oliver.gorwits@oucs.ox.ac.uk>  Fri, 21 Sep 2007 12:30:00 +0100
+
 libmodule-multiconf-perl (0.0300-1) unstable; urgency=low
 
   * Many thanks to Tom Hukins for assisting with the mysterious t/31 bug

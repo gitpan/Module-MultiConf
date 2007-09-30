@@ -15,5 +15,5 @@ META.yml
 Changes
 INSTALL
 lib/Module/MultiConf.pm
-examples/MyAppConfig.pm.example
+examples/MyAppConfig.pm
 examples/config.yml
